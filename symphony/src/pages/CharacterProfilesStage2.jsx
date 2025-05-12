@@ -148,7 +148,7 @@ const CharacterProfiles = () => {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-indigo-500">
                     <img
-                      src={images[selectedCharacter.name] || Unknown}
+                      //src={images[selectedCharacter.name] || Unknown}
                       alt={selectedCharacter.name}
                       className="w-full h-full object-cover"
                     />
