@@ -71,6 +71,7 @@ import LoginPage from './pages/LoginPage';
 import LeaderboardPage from './pages/LeaderboardPage';
 import DashboardPage from './pages/DashboardPage';
 import ProfilePage from './pages/ProfilePage';
+import FinalPuzzleStage2 from './pages/FinalPuzzleStage2';
 
 function App() {
   return (
@@ -99,6 +100,7 @@ function App() {
           <Route path="/puzzle/3/order-of-names/stage2" element={<Puzzle3Branch1Stage2 />} /> {/* Use the correct component */}
           <Route path="/puzzle/3/stage2" element={<Puzzle3Stage2 />} />
           <Route path="/final-puzzle" element={<FinalPuzzle />} />
+          <Route path="/final-puzzle2" element={<FinalPuzzleStage2 />} />
         </Routes>
       </Router>
     </GameProvider>

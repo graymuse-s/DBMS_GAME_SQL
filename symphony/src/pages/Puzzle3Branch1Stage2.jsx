@@ -75,7 +75,7 @@ export default function Puzzle3Branch1Stage2() {
   };
 
   const handleProceed = () => {
-    navigate('/final-puzzle');
+    navigate('/final-puzzle2');
   };
 
 

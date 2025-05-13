@@ -302,9 +302,9 @@ export default function Puzzle3() {
 
     if (result?.isCorrect) {
       updatePuzzle('final');
-      navigate('/final-puzzle');
+      navigate('/final-puzzle2');
     } else {
-      navigate('/final-puzzle');
+      navigate('/final-puzzle2');
     }
   };
 
