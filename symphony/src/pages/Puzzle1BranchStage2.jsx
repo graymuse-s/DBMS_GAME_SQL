@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Clock, BookOpen, HelpCircle, Code, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { GameContext } from '../GameContext';
-import { executeQuery, fetchBranchStage2 } from '../api';
+import { executeQuery2, fetchBranchStage2 } from '../api';
 import QueryResults from '../components/QueryResults';
 import StoryBox from '../components/StoryBox';
 import RiddleComponent from '../components/RiddleComponent';
@@ -43,7 +43,7 @@ export default function Puzzle1BranchStage2() {
         setQueryResult({ loading: true, data: null, error: null });
         setHasQueryExecuted(true);
         try {
-            const result = await executeQuery(selectedQuery, {
+            const result = await executeQuery2(selectedQuery, {
                 puzzleId: 1,
                 currentBranch: '1-archivist', // Changed to 'ordo'
             });

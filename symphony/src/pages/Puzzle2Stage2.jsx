@@ -220,7 +220,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Clock, BookOpen, HelpCircle, Code, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { GameContext } from '../GameContext';
-import { executeQuery, fetchPuzzleStage2, fetchBranch } from '../api';
+import { executeQuery2, fetchPuzzleStage2, fetchBranch } from '../api';
 import QueryResults from '../components/QueryResults';
 import StoryBox from '../components/StoryBox';
 import RiddleComponent from '../components/RiddleComponent';
@@ -284,7 +284,7 @@ export default function Puzzle2Stage2() {
       console.log('Executing query:', selectedQuery);
       console.log('Current puzzle ID:', puzzleData?.id || 2);
       const payload = { puzzleId: puzzleData?.id || 2 };
-      const result = await executeQuery(selectedQuery, {
+      const result = await executeQuery2(selectedQuery, {
         puzzleId: puzzleData?.id || 2,
         currentBranch: currentBranch,
       });
@@ -353,7 +353,7 @@ export default function Puzzle2Stage2() {
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
       <div className="bg-gray-800 border-b border-gray-700 py-3 px-6 flex justify-between items-center">
         <div className="flex items-center">
-          <Link to="/puzzle/1" className="flex items-center text-gray-400 hover:text-gray-300 mr-6">
+          <Link to="/puzzle/1/stage2" className="flex items-center text-gray-400 hover:text-gray-300 mr-6">
             <ArrowLeft className="w-5 h-5 mr-1" />
             <span className="text-sm">Back to Puzzle 1</span>
           </Link>

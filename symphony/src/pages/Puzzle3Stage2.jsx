@@ -203,7 +203,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Clock, BookOpen, HelpCircle, Code, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { GameContext } from '../GameContext';
-import { executeQuery, fetchPuzzleStage2, fetchBranchStage2} from '../api';
+import { executeQuery2, fetchPuzzleStage2, fetchBranchStage2} from '../api';
 import QueryResults from '../components/QueryResults';
 import StoryBox from '../components/StoryBox';
 import ClueBox from '../components/ClueBox';
@@ -261,7 +261,7 @@ export default function Puzzle3() {
     setQueryResult({ loading: true, data: null, error: null });
     setHasQueryExecuted(true);
     try {
-      const result = await executeQuery(selectedQuery, {
+      const result = await executeQuery2(selectedQuery, {
         puzzleId: puzzleData?.id || 3,
         currentBranch: currentBranch,
       });

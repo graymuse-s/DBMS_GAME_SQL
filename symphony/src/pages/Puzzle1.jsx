@@ -528,6 +528,7 @@ export default function Puzzle1() {
     useEffect(() => {
         const loadPuzzle = async () => {
             try {
+                console.log('currentBranchState:', currentBranch);
                 const data = await fetchPuzzle(1);
                 setPuzzleData(data);
             } catch (err) {

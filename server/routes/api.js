@@ -18,6 +18,7 @@
 const express = require('express');
 const gameRoutes = require('./game');
 const queryRoutes = require('./query');
+const queryRoutes2 = require('./queryStage2');
 const characterRoutes = require('./characters'); // Ensure this matches the frontend
 const puzzleRoutes = require('./puzzles');
 const puzzleRoutes2=require('./puzzlesStage2');
@@ -29,6 +30,7 @@ const router = express.Router();
 // Use the appropriate routes
 router.use('/game', gameRoutes);
 router.use('/query', queryRoutes);
+router.use('/query2',queryRoutes2);
 router.use('/characters', characterRoutes);
 router.use('/puzzles', puzzleRoutes);
 router.use('/puzzles2',puzzleRoutes2);

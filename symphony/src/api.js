@@ -77,6 +77,24 @@ export const executeQuery = async (query, payload) => {
   }
   return await res.json();
 };
+export const executeQuery2 = async (query, payload) => {
+  const res = await fetch('http://localhost:3001/api/query2/execute', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: query,
+      currentPuzzle: Number(payload?.puzzleId), // Access puzzleId from the payload
+      currentBranch: payload?.currentBranch,   // Access currentBranch from the payload
+    }),
+  });
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData?.error || 'Failed to execute query');
+  }
+  return await res.json();
+};
 export const updatePuzzle = async (puzzleId) => {
 
   return Promise.resolve();

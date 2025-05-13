@@ -6,7 +6,7 @@ module.exports = {
     queries: [
       { text: "SELECT sp1.name AS Staff_Member, sp2.name AS Related_To FROM staff_profiles sp1 JOIN staff_profiles sp2 ON sp1.related_to = sp2.staff_id WHERE sp1.related_to IS NOT NULL;" },
       { text: "SELECT name, position FROM staff_profiles ORDER BY position;" },
-      { text: "UPDATE staff_profiles SET note = 'Obsessed with the Ordo Cantus lineage' WHERE name = 'Amelia Grant'; SELECT name, note FROM staff_profiles WHERE name = 'Amelia Grant';" },
+      { text: "SELECT name, note FROM staff_profiles WHERE note LIKE '%Ordo%';" },
       
 
     ],

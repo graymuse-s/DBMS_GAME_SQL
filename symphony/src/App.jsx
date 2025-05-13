@@ -96,7 +96,7 @@ function App() {
           <Route path="/puzzle/3" element={<Puzzle3 />} />
           <Route path="/puzzle/3/archivist" element={<Puzzle3Branch />} />
           <Route path="/puzzle/3/technician" element={<Puzzle3Branch2 />} />
-          <Route path="/puzzle/3/archivist/stage2" element={<Puzzle3Branch1Stage2 />} /> {/* Use the correct component */}
+          <Route path="/puzzle/3/order-of-names/stage2" element={<Puzzle3Branch1Stage2 />} /> {/* Use the correct component */}
           <Route path="/puzzle/3/stage2" element={<Puzzle3Stage2 />} />
           <Route path="/final-puzzle" element={<FinalPuzzle />} />
         </Routes>
