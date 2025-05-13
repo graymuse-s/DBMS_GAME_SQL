@@ -2,14 +2,14 @@ import { useState, useEffect, useContext } from 'react';
 import { Clock, BookOpen, HelpCircle, Code, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { GameContext } from '../GameContext';
-import { executeQuery, fetchBranch } from '../api';
+import { executeQuery, fetchBranchStage2 } from '../api';
 import QueryResults from '../components/QueryResults';
 import StoryBox from '../components/StoryBox';
 import RiddleComponent from '../components/RiddleComponent';
 import SQLQueryInterface from '../components/SQLQueryInterface';
 import Notebook from '../components/Notebook';
 
-export default function Puzzle1Branch() {
+export default function Puzzle1BranchStage2() {
     const navigate = useNavigate();
     const { gameTime, deductTime, addNotebookEntry, notebookEntries } = useContext(GameContext);
     const [isNotebookOpen, setIsNotebookOpen] = useState(false);
@@ -24,7 +24,7 @@ export default function Puzzle1Branch() {
     useEffect(() => {
         const loadBranch = async () => {
             try {
-                const data = await fetchBranch('1-archivist'); // Changed to '1-ordo'
+                const data = await fetchBranchStage2('1-archivist'); // Changed to '1-ordo'
                 setBranchData(data);
             } catch (err) {
                 setError(err.message || 'Failed to load branch data.');
@@ -45,7 +45,7 @@ export default function Puzzle1Branch() {
         try {
             const result = await executeQuery(selectedQuery, {
                 puzzleId: 1,
-                currentBranch: 'ordo', // Changed to 'ordo'
+                currentBranch: '1-archivist', // Changed to 'ordo'
             });
             setQueryResult({ loading: false, data: result, error: null });
             if (result?.notebookUpdate) {

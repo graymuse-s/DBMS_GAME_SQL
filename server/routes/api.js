@@ -20,6 +20,7 @@ const gameRoutes = require('./game');
 const queryRoutes = require('./query');
 const characterRoutes = require('./characters'); // Ensure this matches the frontend
 const puzzleRoutes = require('./puzzles');
+const puzzleRoutes2=require('./puzzlesStage2');
 const authRoutes = require('./authRoutes');
 const finalPuzzleRoutes = require('./finalPuzzleRoutes'); // Import the new route
 
@@ -30,6 +31,7 @@ router.use('/game', gameRoutes);
 router.use('/query', queryRoutes);
 router.use('/characters', characterRoutes);
 router.use('/puzzles', puzzleRoutes);
+router.use('/puzzles2',puzzleRoutes2);
 router.use('/auth', authRoutes);
 router.use('/finalPuzzle', finalPuzzleRoutes); // Use the new route, you might want to adjust the path prefix
 

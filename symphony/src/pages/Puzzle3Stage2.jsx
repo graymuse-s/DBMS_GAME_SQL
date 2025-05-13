@@ -203,7 +203,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Clock, BookOpen, HelpCircle, Code, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { GameContext } from '../GameContext';
-import { executeQuery, fetchPuzzle, fetchBranch } from '../api';
+import { executeQuery, fetchPuzzleStage2, fetchBranchStage2} from '../api';
 import QueryResults from '../components/QueryResults';
 import StoryBox from '../components/StoryBox';
 import ClueBox from '../components/ClueBox';
@@ -226,7 +226,7 @@ export default function Puzzle3() {
   useEffect(() => {
     const loadPuzzle = async () => {
       try {
-        const data = await fetchPuzzle(3);
+        const data = await fetchPuzzleStage2(3);
         setPuzzleData(data);
       } catch (err) {
         setError(err.message || 'Failed to load puzzle data.');
@@ -237,21 +237,21 @@ export default function Puzzle3() {
     loadPuzzle();
   }, []);
 
-  useEffect(() => {
-    const loadBranchData = async () => {
-      try {
-        const branchType = currentBranch === '3-archivist' ? '3-archivist' : '3-technician';
-        const data = await fetchBranch(branchType);
-        setBranchData(data);
-      } catch (err) {
-        setError(err.message || 'Failed to load branch data.');
-      }
-    };
+  // useEffect(() => {
+  //   const loadBranchData = async () => {
+  //     try {
+  //       const branchType = currentBranch === '3-archivist' ? '3-archivist' : '3-technician';
+  //       const data = await fetchBranchStage2(branchType);
+  //       setBranchData(data);
+  //     } catch (err) {
+  //       setError(err.message || 'Failed to load branch data.');
+  //     }
+  //   };
 
-    if (puzzleData) {
-      loadBranchData();
-    }
-  }, [puzzleData, currentBranch]);
+  //   if (puzzleData) {
+  //     loadBranchData();
+  //   }
+  // }, [puzzleData, currentBranch]);
 
   const handleQuerySelect = (queryText) => setSelectedQuery(queryText);
 

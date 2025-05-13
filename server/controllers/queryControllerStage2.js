@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const db = require('../config/dbGame');
 
-const queryController = {
+const queryControllerStage2 = {
     executeQuery: async (req, res) => {
         const { query, currentPuzzle, currentBranch, queryId } = req.body;
 
@@ -159,4 +159,4 @@ const queryController = {
     }
 };
 
-module.exports = queryController;
+module.exports = queryControllerStage2;

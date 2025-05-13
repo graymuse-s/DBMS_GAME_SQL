@@ -1,7 +1,7 @@
 const puzzleDefinitions = require('../models/puzzleDefinitionsStage2');
 const branchDefinitions = require('../models/branchDefinitionsStage2');
 
-const puzzleController = {
+const puzzleControllerStage2 = {
   getPuzzleData: async (req, res) => {
     const { id } = req.params;
     const puzzle = puzzleDefinitions[id];

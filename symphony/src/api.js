@@ -15,9 +15,20 @@ export const fetchPuzzle = async (puzzleId) => {
   if (!res.ok) throw new Error('Failed to fetch puzzle');
   return await res.json();
 };
+export const fetchPuzzleStage2 = async (puzzleId) => {
+  const res = await fetch(`http://localhost:3001/api/puzzles2/${puzzleId}`);
+  if (!res.ok) throw new Error('Failed to fetch puzzle');
+  return await res.json();
+};
 
 export const fetchBranch = async (branchId) => {
   const res = await fetch(`http://localhost:3001/api/puzzles/branch/${branchId}`);
+  if (!res.ok) throw new Error('Failed to fetch branch');
+  return await res.json();
+};
+
+export const fetchBranchStage2 = async (branchId) => {
+  const res = await fetch(`http://localhost:3001/api/puzzles2/branch/${branchId}`);
   if (!res.ok) throw new Error('Failed to fetch branch');
   return await res.json();
 };

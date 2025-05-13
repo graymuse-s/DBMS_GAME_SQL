@@ -2,14 +2,14 @@ import { useState, useEffect, useContext } from 'react';
 import { Clock, BookOpen, HelpCircle, Code, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { GameContext } from '../GameContext';
-import { executeQuery, fetchBranch } from '../api';
+import { executeQuery, fetchBranchStage2 } from '../api';
 import QueryResults from '../components/QueryResults';
 import StoryBox from '../components/StoryBox';
 import RiddleComponent from '../components/RiddleComponent';
 import SQLQueryInterface from '../components/SQLQueryInterface';
 import Notebook from '../components/Notebook';
 
-export default function Puzzle3Branch1() {
+export default function Puzzle3Branch1Stage2() {
   const navigate = useNavigate();
   const { gameTime, deductTime, addNotebookEntry, updatePuzzle, currentBranch, notebookEntries, updateBranch } = useContext(GameContext);
   const [isNotebookOpen, setIsNotebookOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function Puzzle3Branch1() {
       setLoading(true);
       setError(null);
       try {
-        const data = await fetchBranch('3-order-of-names');
+        const data = await fetchBranchStage2('3-order-of-names');
         setBranchData(data);
       } catch (err) {
         setError(err.message || 'Failed to load branch data.');

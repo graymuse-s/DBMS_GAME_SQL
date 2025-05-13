@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Clock, BookOpen, HelpCircle, Code, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { GameContext } from '../GameContext';
-import { executeQuery, fetchPuzzle } from '../api';
+import { executeQuery, fetchPuzzleStage2 } from '../api';
 import QueryResults from '../components/QueryResults';
 import StoryBox from '../components/StoryBox';
 import ClueBox from '../components/ClueBox';
@@ -10,7 +10,7 @@ import SQLQueryInterface from '../components/SQLQueryInterface';
 import GameProgressBar from '../components/GameProgressBar';
 import Notebook from '../components/Notebook';
 
-export default function Puzzle1() {
+export default function Puzzle1Stage2() {
     const navigate = useNavigate();
     const {
         gameTime,
@@ -33,7 +33,7 @@ export default function Puzzle1() {
     useEffect(() => {
         const loadPuzzle = async () => {
             try {
-                const data = await fetchPuzzle(1);
+                const data = await fetchPuzzleStage2(1);
                 setPuzzleData(data);
             } catch (err) {
                 setError(err.message || 'Failed to load puzzle data.');

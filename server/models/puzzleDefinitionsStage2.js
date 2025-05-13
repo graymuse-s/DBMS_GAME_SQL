@@ -7,6 +7,8 @@ module.exports = {
       { text: "SELECT sp1.name AS Staff_Member, sp2.name AS Related_To FROM staff_profiles sp1 JOIN staff_profiles sp2 ON sp1.related_to = sp2.staff_id WHERE sp1.related_to IS NOT NULL;" },
       { text: "SELECT name, position FROM staff_profiles ORDER BY position;" },
       { text: "UPDATE staff_profiles SET note = 'Obsessed with the Ordo Cantus lineage' WHERE name = 'Amelia Grant'; SELECT name, note FROM staff_profiles WHERE name = 'Amelia Grant';" },
+      
+
     ],
     riddle: "Which SQL clause would most accurately revert the change to Amelia Grant's note, while preserving other potential data?",
     options: [
@@ -23,7 +25,10 @@ module.exports = {
     queries: [
       { text: "SELECT sender_phone, receiver_phone, message, timestamp FROM communication_logs WHERE message LIKE '%aria%' OR message LIKE '%code%' OR message LIKE '%ledger%';"},
       { text: "SELECT * FROM communication_logs ORDER BY timestamp ASC LIMIT 3;" },
-      { text: "UPDATE room_bookings SET end_time = '2025-04-25 16:00:00' WHERE staff_id = 'S005' AND room_id = 'RB03'; SELECT * FROM room_bookings WHERE staff_id = 'S005';" },
+      // { text: "UPDATE room_bookings SET end_time = '2025-04-25 16:00:00' WHERE staff_id = 'S005' AND room_id = 'RB03'; SELECT * FROM room_bookings WHERE staff_id = 'S005';" },
+        { text: "SELECT rb.room, sp.name, rb.start_time FROM room_bookings rb JOIN staff_profiles sp ON rb.staff_id = sp.staff_id WHERE rb.room = 'Archive Vault';" },
+
+
     ],
     riddle: "Which SQL statement would most accurately revert the change to Aiden Crane's booking, ensuring data integrity?",
     options: [

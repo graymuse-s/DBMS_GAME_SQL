@@ -220,7 +220,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Clock, BookOpen, HelpCircle, Code, ArrowRight, ArrowLeft } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { GameContext } from '../GameContext';
-import { executeQuery, fetchPuzzle, fetchBranch } from '../api';
+import { executeQuery, fetchPuzzleStage2, fetchBranch } from '../api';
 import QueryResults from '../components/QueryResults';
 import StoryBox from '../components/StoryBox';
 import RiddleComponent from '../components/RiddleComponent';
@@ -228,7 +228,7 @@ import SQLQueryInterface from '../components/SQLQueryInterface';
 import Notebook from '../components/Notebook';
 import GameProgressBar from '../components/GameProgressBar';
 
-export default function Puzzle2() {
+export default function Puzzle2Stage2() {
   const navigate = useNavigate();
   const { gameTime, deductTime, addNotebookEntry, updatePuzzle, currentBranch, notebookEntries, updateBranch } = useContext(GameContext);
   const [isNotebookOpen, setIsNotebookOpen] = useState(false);
@@ -243,7 +243,7 @@ export default function Puzzle2() {
   useEffect(() => {
     const loadPuzzle = async () => {
       try {
-        const data = await fetchPuzzle(2);
+        const data = await fetchPuzzleStage2(2);
         setPuzzleData(data);
       } catch (err) {
         setError(err.message || 'Failed to load puzzle data.');
@@ -254,24 +254,24 @@ export default function Puzzle2() {
     loadPuzzle();
   }, []);
 
-  useEffect(() => {
-    const loadBranchData = async () => {
-      try {
-        const branchType = currentBranch === '2-stage-left' ? '2-stage-left' : '2-footage-analysis';
-        const data = await fetchBranch(branchType);
-        setBranchData(data);
-      } catch (err) {
-        setError(err.message || 'Failed to load branch data.');
-      } finally {
-        // setLoading is already handled by the puzzle load
-      }
-    };
+  // useEffect(() => {
+  //   const loadBranchData = async () => {
+  //     try {
+  //       const branchType = currentBranch === '2-stage-left' ? '2-stage-left' : '2-footage-analysis';
+  //       const data = await fetchBranch(branchType);
+  //       setBranchData(data);
+  //     } catch (err) {
+  //       setError(err.message || 'Failed to load branch data.');
+  //     } finally {
+  //       // setLoading is already handled by the puzzle load
+  //     }
+  //   };
 
-    // Only load the branch data if the puzzle data has loaded
-    if (puzzleData) {
-      loadBranchData();
-    }
-  }, [puzzleData, currentBranch]);
+  //   // Only load the branch data if the puzzle data has loaded
+  //   if (puzzleData) {
+  //     loadBranchData();
+  //   }
+  // }, [puzzleData, currentBranch]);
 
   const handleQuerySelect = (queryText) => setSelectedQuery(queryText);
 
