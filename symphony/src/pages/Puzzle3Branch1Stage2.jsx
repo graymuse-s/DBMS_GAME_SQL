@@ -53,7 +53,7 @@ export default function Puzzle3Branch1Stage2() {
     try {
       const result = await executeQuery2(selectedQuery, {
         puzzleId: 3,
-        currentBranch: currentBranch,
+        currentBranch: '3-order-of-names',
       });
       setQueryResult({ loading: false, data: result, error: null });
 
@@ -98,8 +98,8 @@ export default function Puzzle3Branch1Stage2() {
     return `${hours}:${mins < 10 ? '0' + mins : mins}`;
   };
 
-  if (loading || !branchData) return <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">Loading Archivist's Interest...</div>;
-  if (error) return <div className="min-h-screen bg-gray-900 text-red-500 flex items-center justify-center">Error loading Archivist's Interest: {error}</div>;
+  if (loading || !branchData) return <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">Loading Order of Names...</div>;
+  if (error) return <div className="min-h-screen bg-gray-900 text-red-500 flex items-center justify-center">Error loading Order of Names {error}</div>;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
@@ -109,7 +109,7 @@ export default function Puzzle3Branch1Stage2() {
             <ArrowLeft className="w-5 h-5 mr-1" />
             <span className="text-sm">Back</span>
           </button>
-          <h1 className="text-xl font-medium text-red-400">False Lead: The Archivist's Interest</h1>
+          <h1 className="text-xl font-medium text-red-400">The Order of Names</h1>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center bg-gray-700 px-3 py-1 rounded-full">

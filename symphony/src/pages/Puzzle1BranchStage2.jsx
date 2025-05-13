@@ -63,7 +63,7 @@ export default function Puzzle1BranchStage2() {
     };
 
     const handleProceed = () => {
-        navigate('/puzzle/2');
+        navigate('/puzzle/2/stage2');
     };
 
     const handleRiddleSelect = (selectedOptionId) => {
@@ -94,7 +94,7 @@ export default function Puzzle1BranchStage2() {
                         <ArrowLeft className="w-5 h-5 mr-1" />
                         <span className="text-sm">Back</span>
                     </button>
-                    <h1 className="text-xl font-medium text-red-400">False Lead: The Archivist's Obsession</h1>
+                    <h1 className="text-xl font-medium text-red-400">The Archivist's Obsession</h1>
                 </div>
                 <div className="flex items-center gap-4">
                     <div className="flex items-center bg-gray-700 px-3 py-1 rounded-full">

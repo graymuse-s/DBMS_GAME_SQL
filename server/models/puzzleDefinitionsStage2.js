@@ -30,13 +30,13 @@ module.exports = {
 
 
     ],
-    riddle: "Which SQL statement would most accurately revert the change to Aiden Crane's booking, ensuring data integrity?",
-    options: [
-        "UPDATE room_bookings SET end_time = NULL WHERE staff_id = 'S005';",
-        "UPDATE room_bookings SET end_time = NULL WHERE room_id = 'RB03';",
-        "UPDATE room_bookings SET end_time = NULL WHERE staff_id = 'S005' AND room_id = 'RB03';",
-        "UPDATE room_bookings SET end_time = '2025-04-25 15:00:00' WHERE staff_id = 'S005' AND room_id = 'RB03';"
-    ]
+    riddle: "Which of the following datatype is most appropriate for storing a string of up to 255 characters?",
+     options: [
+        { id: 'a', text: 'TEXT' },
+        { id: 'b', text: 'TINY TEXT', correct: true, resultText: 'Correct! ' },
+        { id: 'c', text: 'BLOB' },
+        { id: 'd', text: 'None of the above' },
+      ],
   },
   '3': {
     title: '🎼 Final Puzzle – Unlocking ordo_files and Stage Completion',

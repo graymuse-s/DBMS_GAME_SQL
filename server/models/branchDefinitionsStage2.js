@@ -28,18 +28,18 @@ module.exports = {
     branchQueries: [
       { text: "SELECT sp.name, DATE(rb.start_time) AS booking_date FROM room_bookings rb JOIN staff_profiles sp ON rb.staff_id = sp.staff_id WHERE rb.room = 'Archive Vault';" },
       { text: "SELECT * FROM room_bookings WHERE staff_id = 'S002';" },
-      { text: "SELECT AVG(JULIANDAY(end_time) - JULIANDAY(start_time)) FROM room_bookings;" },
+      { text: " SELECT AVG(TIMESTAMPDIFF(SECOND, start_time, end_time) / (60 * 60 * 24)) FROM room_bookings;" },
     ],
   },
   '3-order-of-names': {
     outcome: "The alphabetical order of names seems arbitrary, a potential red herring.",
     branchEnding: "The seemingly random order of names becomes the focus, a potential hidden code that Corbin struggles to decipher.",
-    riddle: "Which SQL clause is used to retrieve data from the ordo_files table?",
+    riddle: "Which of the following datatype is most appropriate for storing a string of up to 255 characters?",
     options: [
-      { id: 'a', text: 'WHERE' },
-      { id: 'b', text: 'UPDATE' },
-      { id: 'c', text: 'SELECT', correct: true, resultText: 'Correct! SELECT is used to retrieve data.' },
-      { id: 'd', text: 'DELETE' },
+      { id: 'a', text: 'TEXT' },
+      { id: 'b', text: 'BLOB' },
+      { id: 'c', text: 'TINY TEXT', correct: true, resultText: 'Correct! TINY TEXT can contain a string of up to 255 characters or 255 bytes.' },
+      { id: 'd', text: 'BINARY' },
     ],
     branchQueries: [
       { text: "SELECT note FROM ordo_files;" },

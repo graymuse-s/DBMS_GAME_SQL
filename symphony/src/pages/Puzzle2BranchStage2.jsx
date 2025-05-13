@@ -235,7 +235,7 @@ export default function Puzzle2BranchStage2() {
     try {
       const result = await executeQuery2(selectedQuery, {
         puzzleId: 2,
-        currentBranch: currentBranch,
+        currentBranch: '2-vault-secrets',
       });
       setQueryResult({ loading: false, data: result, error: null });
 
@@ -277,8 +277,8 @@ export default function Puzzle2BranchStage2() {
     return `${hours}:${mins < 10 ? '0' + mins : mins}`;
   };
 
-  if (loading || !branchData) return <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">Loading Stage Left Out...</div>;
-  if (error) return <div className="min-h-screen bg-gray-900 text-red-500 flex items-center justify-center">Error loading Stage Left Out: {error}</div>;
+  if (loading || !branchData) return <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">Loading Stage: Vault Secrets...</div>;
+  if (error) return <div className="min-h-screen bg-gray-900 text-red-500 flex items-center justify-center">Error loading Stage Vault Secrets: {error}</div>;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
@@ -288,7 +288,7 @@ export default function Puzzle2BranchStage2() {
             <ArrowLeft className="w-5 h-5 mr-1" />
             <span className="text-sm">Back</span>
           </button>
-          <h1 className="text-xl font-medium text-red-400">False Lead: Stage Left Out</h1>
+          <h1 className="text-xl font-medium text-red-400">Stage: Vault Secrets</h1>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center bg-gray-700 px-3 py-1 rounded-full">

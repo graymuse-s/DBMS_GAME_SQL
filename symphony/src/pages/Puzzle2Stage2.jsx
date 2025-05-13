@@ -327,7 +327,7 @@ export default function Puzzle2Stage2() {
     // For correct or incorrect (not misleading), proceed to Puzzle 3
     if (result?.isCorrect || (!result?.isCorrect && !result?.isMisleading)) {
       updatePuzzle(3);
-      navigate('/puzzle/3');
+      navigate('/puzzle/3/stage2');
       return;
     }
 
@@ -381,7 +381,7 @@ export default function Puzzle2Stage2() {
           <div className="space-y-6 mt-4">
             {puzzleData?.story && <StoryBox text={puzzleData.story} />}
 
-            {puzzleData?.riddle && (
+            {/* {puzzleData?.riddle && (
               <div className="bg-gray-800 p-4 rounded-lg border border-gray-700">
                 <h3 className="text-lg font-medium text-yellow-300 mb-2 flex items-center">
                   <HelpCircle className="w-5 h-5 mr-2" />
@@ -392,7 +392,7 @@ export default function Puzzle2Stage2() {
                   <RiddleComponent options={puzzleData.options} />
                 )}
               </div>
-            )}
+            )} */}
 
             {puzzleData?.queries && (
               <div className="bg-gray-800 p-4 rounded-lg border border-gray-700">
@@ -472,4 +472,3 @@ export default function Puzzle2Stage2() {
     </div>
   );
 }
-
