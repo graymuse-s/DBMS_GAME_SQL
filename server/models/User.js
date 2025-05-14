@@ -14,7 +14,7 @@ const User = authDB.define('User', {
     },
     coins: {
         type: DataTypes.INTEGER,
-        defaultValue: 100,
+        defaultValue: 0,
         allowNull: false,
     },
 });

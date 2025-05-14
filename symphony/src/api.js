@@ -59,7 +59,20 @@ export const fetchBranchStage2 = async (branchId) => {
 //   if (!res.ok) throw new Error('Failed to execute query');
 //   return await res.json();
 // };
-export const executeQuery = async (query, payload) => {
+
+
+
+
+
+//const userId = localStorage.getItem('userId'); // Assuming the userId was stored as 'userId'
+
+// Check if userId exists
+/*if (!userId) {
+  console.error("User is not logged in or userId is not in localStorage");
+  // Handle this case as needed (e.g., redirect to login page)
+}*/
+
+/*export const executeQuery = async (query, payload) => {
   const res = await fetch('http://localhost:3001/api/query/execute', {
     method: 'POST',
     headers: {
@@ -69,15 +82,68 @@ export const executeQuery = async (query, payload) => {
       query: query,
       currentPuzzle: Number(payload?.puzzleId), // Access puzzleId from the payload
       currentBranch: payload?.currentBranch,   // Access currentBranch from the payload
+      userId: userId
     }),
   });
   if (!res.ok) {
     const errorData = await res.json();
     throw new Error(errorData?.error || 'Failed to execute query');
   }
-  return await res.json();
+  const data = await res.json();
+
+  if (data.updatedCoins !== undefined && user) {
+    user.coins = data.updatedCoins;
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+  return data;
+};*/
+export const executeQuery = async (query, payload) => {
+  const userId = localStorage.getItem('userId'); // Optional fallback
+  const user = JSON.parse(localStorage.getItem('user')); // ✅ Now defined
+
+  if (!userId && !user) {
+    console.error("User is not logged in or user info is missing in localStorage");
+    throw new Error("User not logged in");
+  }
+
+  const res = await fetch('http://localhost:3001/api/query/execute', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: query,
+      currentPuzzle: Number(payload?.puzzleId),
+      currentBranch: payload?.currentBranch,
+      userId: user?.userId || userId
+    }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData?.error || 'Failed to execute query');
+  }
+
+  const data = await res.json();
+
+  if (data.updatedCoins !== undefined && user) {
+    user.coins = data.updatedCoins;
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  return data;
 };
+
+
+
 export const executeQuery2 = async (query, payload) => {
+  const userId = localStorage.getItem('userId'); // Optional fallback
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (!userId && !user) {
+    console.error("User is not logged in or user info is missing in localStorage");
+    throw new Error("User not logged in");
+  }
   const res = await fetch('http://localhost:3001/api/query2/execute', {
     method: 'POST',
     headers: {
@@ -87,13 +153,21 @@ export const executeQuery2 = async (query, payload) => {
       query: query,
       currentPuzzle: Number(payload?.puzzleId), // Access puzzleId from the payload
       currentBranch: payload?.currentBranch,   // Access currentBranch from the payload
+      userId: user?.userId || userId
     }),
   });
   if (!res.ok) {
     const errorData = await res.json();
     throw new Error(errorData?.error || 'Failed to execute query');
   }
-  return await res.json();
+  const data = await res.json();
+
+  if (data.updatedCoins !== undefined && user) {
+    user.coins = data.updatedCoins;
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  return data;
 };
 export const updatePuzzle = async (puzzleId) => {
 
@@ -125,5 +199,13 @@ export const signup = async (username, password) => {
 export const fetchLeaderboard = async () => {
   const res = await fetch(`${API_BASE}/leaderboard`);
   if (!res.ok) throw new Error('Failed to load leaderboard');
+  return await res.json();
+};
+
+export const fetchUserData = async (userId) => {
+  const res = await fetch(`${API_BASE}/users/${userId}`); // Corrected route
+  if (!res.ok) {
+    throw new Error(`Failed to fetch user data: ${res.status}`);
+  }
   return await res.json();
 };

@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const authDB = new Sequelize('fatal_query', 'root', '', {
+const authDB = new Sequelize('fatal_query', 'root', 'blacksheep', {
     host: 'localhost',
     dialect: 'mysql',
     logging: false,

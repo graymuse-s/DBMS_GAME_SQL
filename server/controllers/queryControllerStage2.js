@@ -162,10 +162,11 @@
 // module.exports = queryControllerStage2;
 const { Sequelize } = require('sequelize');
 const db = require('../config/dbGame');
+const User = require('../models/User');
 
 const queryControllerStage2 = {
     executeQuery: async (req, res) => {
-        const { query, currentPuzzle, currentBranch, queryId } = req.body;
+        const { query, currentPuzzle, currentBranch, queryId, userId } = req.body;
 
         let notebookUpdate;
         let nextPuzzle;
@@ -184,19 +185,19 @@ const queryControllerStage2 = {
             if (currentPuzzle === 1 && currentBranch === '1-archivist') {
                 if (query.includes("UPDATE staff_profiles") && query.includes("SET note") && query.includes("WHERE name = 'Amelia Grant'") && query.includes("'and their symbols'")) {
                     notebookUpdate = "Corbin makes a mental note of Amelia's amplified interest, a thread to potentially unravel later, even if it deviates from the initial lead.";
-                    branchPath="/puzzle/2/stage2";
+                    branchPath = "/puzzle/2/stage2";
                 } else if (query.includes("ORDER BY name DESC LIMIT 1")) {
                     timePenalty = 30;
                     notebookUpdate = "Focusing on the last name alphabetically provides no immediate connection to the Ordo Cantus.";
-                    branchPath="/puzzle/2/stage2";
+                    branchPath = "/puzzle/2/stage2";
                 } else if (query.includes("ALTER TABLE staff_profiles")) {
                     timePenalty = 30;
                     notebookUpdate = "Corbin realizes altering the database structure isn't the immediate goal, a detour that consumes valuable time.";
-                    branchPath="/puzzle/2/stage2";
+                    branchPath = "/puzzle/2/stage2";
                 } else {
                     timePenalty = 30;
                     notebookUpdate = "Incorrect query for Puzzle 1 (Archivist Branch). Please try again.";
-                    branchPath="/puzzle/2/stage2";
+                    branchPath = "/puzzle/2/stage2";
                 }
 
             }
@@ -214,7 +215,7 @@ const queryControllerStage2 = {
                 } else if (query.includes("SELECT name, position FROM staff_profiles ORDER BY position")) {
                     timePenalty = 30;
                     notebookUpdate = "The ordered list of staff positions offers no immediate insight into hidden relationships, wasting precious time.";
-                    branchPath="/puzzle/2/stage2";
+                    branchPath = "/puzzle/2/stage2";
                 } else if (query.includes("UPDATE staff_profiles") && query.includes("SET note") && query.includes("WHERE name = 'Amelia Grant'")) {
                     notebookUpdate = "Corbin makes a mental note of Amelia's amplified interest, a thread to potentially unravel later, even if it deviates from the initial lead.";
                     isMisleading = true; //missing from original code
@@ -229,7 +230,7 @@ const queryControllerStage2 = {
                     timePenalty = 30;
                     notebookUpdate = "Incorrect query for Puzzle 1. Please try again.";
                 }
-            } 
+            }
             else if (currentPuzzle === 2 && currentBranch === '2-vault-secrets') {
                 if (query.includes("SELECT sp.name, DATE(rb.start_time)")) {
                     notebookUpdate = "Corbin notes the specific dates of Amelia's vault access, further solidifying the archive as a key location.";
@@ -245,7 +246,7 @@ const queryControllerStage2 = {
                 }
 
             }
-             else if (currentPuzzle === 2) {
+            else if (currentPuzzle === 2) {
                 if (query.includes("FROM communication_logs") && query.includes("WHERE message LIKE") && (query.includes("'%aria%'") || query.includes("'%code%'") || query.includes("'%ledger%'"))) {
                     const ariaMatch = results.find(row =>
                         row.message.includes('aria') || row.message.includes('code') || row.message.includes('ledger')
@@ -260,7 +261,7 @@ const queryControllerStage2 = {
                 } else if (query.includes("ORDER BY timestamp ASC LIMIT 3")) {
                     timePenalty = 30;
                     notebookUpdate = "Reviewing the earliest messages yields no apparent connection to the 'Aria II' or the Ordo Cantus.";
-                    branchPath="/puzzle/3/stage2";
+                    branchPath = "/puzzle/3/stage2";
                 } else if (query.includes("UPDATE room_bookings") && query.includes("SET end_time") && query.includes("WHERE staff_id = 'S005' AND room_id = 'RB03'")) {
                     branchPath = '/puzzle/2/vault-secrets';
                     isMisleading = true;
@@ -274,7 +275,7 @@ const queryControllerStage2 = {
                     timePenalty = 30;
                     notebookUpdate = "Incorrect query for Puzzle 2. Please try again.";
                 }
-            } 
+            }
             else if (currentPuzzle === 3 && currentBranch === '3-order-of-names') {
                 if (query.includes("SELECT note FROM ordo_files")) {
                     notebookUpdate = "Corbin gains access to the notes within ordo_files, but their meaning remains elusive without the correct key.";
@@ -289,7 +290,7 @@ const queryControllerStage2 = {
                     notebookUpdate = "Incorrect query for Puzzle 3 (Order of Names Branch). Please try again.";
                 }
             }
-             else if (currentPuzzle === 3) {
+            else if (currentPuzzle === 3) {
                 if (query.includes("WHERE position IN ('Music Theorist', 'Archivist', 'Patron Donor', 'Janitorial Lead')")) {
                     const correctStaff = results.every(row =>
                         ['Leo Voss', 'Amelia Grant', 'Victor Crane', 'Sylvia Markov'].includes(row.name)
@@ -310,7 +311,7 @@ const queryControllerStage2 = {
                     timePenalty = 30;
                     notebookUpdate = "Incorrect query for Puzzle 3. Please try again.";
                 }
-            }  else if (currentPuzzle === 4) {
+            } else if (currentPuzzle === 4) {
                 if (query.includes("SELECT note FROM ordo_files WHERE code_name = 'aria_ii'")) {
                     notebookUpdate = "The note reveals: 'Fibonacci notes control the lock. Start with 0, unlock in threes.' Corbin understands – a musical sequence holds the key.";
                     isCorrect = true;
@@ -319,7 +320,29 @@ const queryControllerStage2 = {
                 timePenalty = 30;
                 notebookUpdate = "Incorrect puzzle context. Please try again.";
             }
+            let newCoins = null;
+            let coinChange = -5;
+            if (isCorrect) {
+                coinChange = 5;
+            }
+            // Update user coins
+            if (userId) {
+                const user = await User.findByPk(userId);
+                if (user) {
+                    newCoins = Math.max(0, user.coins + coinChange); // Ensure coins don't go below 0
+                    await user.update({ coins: newCoins });
+                    console.log(`User ${userId} coins updated by ${coinChange}. New balance: ${newCoins}`);
+                    // Optionally, you could also send the updated coin balance back in the response
 
+
+                } else {
+                    console.error(`User not found with ID: ${userId}`);
+                    // Handle the case where the user isn't found (shouldn't happen if you're managing sessions correctly)
+                }
+            } else {
+                console.error('User ID not provided in the request.');
+                // Handle the case where userId is missing
+            }
             res.json({
                 resultText: 'Query executed successfully.',
                 table: results,
@@ -331,6 +354,7 @@ const queryControllerStage2 = {
                 isMisleading,
                 suspectQuestion,
                 suspectOptions,
+                updatedCoins: newCoins
             });
         } catch (err) {
             console.error('Query error:', err);

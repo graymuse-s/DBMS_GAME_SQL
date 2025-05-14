@@ -417,7 +417,7 @@ const FinalPuzzle = () => {
 
   const handleProceed = () => {
     if (isSelectionCorrect !== null) {
-      navigate('/end-game');
+      navigate('/dashboard');
     }
   };
 
@@ -472,11 +472,10 @@ const FinalPuzzle = () => {
                   <button
                     key={suspect.value}
                     onClick={() => handleSuspectSelect('puzzle1', suspect.value)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                      selectedSuspects.puzzle1 === suspect.value
-                        ? 'bg-indigo-700 text-white'
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    }`}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedSuspects.puzzle1 === suspect.value
+                      ? 'bg-indigo-700 text-white'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
                   >
                     {suspect.name}
                   </button>
@@ -494,11 +493,10 @@ const FinalPuzzle = () => {
                   <button
                     key={suspect.value}
                     onClick={() => handleSuspectSelect('puzzle2', suspect.value)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                      selectedSuspects.puzzle2 === suspect.value
-                        ? 'bg-indigo-700 text-white'
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    }`}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedSuspects.puzzle2 === suspect.value
+                      ? 'bg-indigo-700 text-white'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
                   >
                     {suspect.name}
                   </button>
@@ -516,11 +514,10 @@ const FinalPuzzle = () => {
                   <button
                     key={suspect.value}
                     onClick={() => handleSuspectSelect('puzzle3', suspect.value)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                      selectedSuspects.puzzle3 === suspect.value
-                        ? 'bg-indigo-700 text-white'
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    }`}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedSuspects.puzzle3 === suspect.value
+                      ? 'bg-indigo-700 text-white'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
                   >
                     {suspect.name}
                   </button>
@@ -551,7 +548,16 @@ const FinalPuzzle = () => {
                     <p className="text-gray-400 leading-relaxed whitespace-pre-line">
                       {finalNarrative}
                     </p>
+                    <div className="mt-6">
+                      <button
+                        onClick={handleProceed}
+                        className="bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-semibold flex items-center"
+                      >
+                        Proceed to next Stages!
+                      </button>
+                    </div>
                   </>
+
                 ) : (
                   <>
                     <div className="flex items-center gap-2 text-red-500 mb-2">
@@ -561,18 +567,18 @@ const FinalPuzzle = () => {
                     <p className="text-gray-400 leading-relaxed whitespace-pre-line">
                       {finalNarrative}
                     </p>
+
+                    <div className="mt-6">
+                      <button
+                        onClick={handleProceed}
+                        className="bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-semibold flex items-center"
+                      >
+                        Sorry...Retry!
+                      </button>
+                    </div>
                   </>
                 )}
-                {isSelectionCorrect !== null && (
-                  <div className="mt-6">
-                    <button
-                      onClick={handleProceed}
-                      className="bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-semibold flex items-center"
-                    >
-                      Proceed to End Game
-                    </button>
-                  </div>
-                )}
+
               </div>
             )}
             {error && <div className="mt-4 text-red-500">{error}</div>}

@@ -85,7 +85,7 @@ const FinalPuzzleStage2 = () => {
 
   const handleProceed = () => {
     if (isSelectionCorrect !== null) {
-      navigate('/stage-3'); // Assuming '/stage-3' is the next route
+      navigate('/dashboard'); // Assuming '/stage-3' is the next route
     } else {
       alert('Please check your answers before proceeding.');
     }
@@ -139,11 +139,10 @@ const FinalPuzzleStage2 = () => {
                   <button
                     key={culprit.value}
                     onClick={() => handleCulpritSelect('puzzle1', culprit.value)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                      selectedCulprits.puzzle1 === culprit.value
-                        ? 'bg-indigo-700 text-white'
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    }`}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedCulprits.puzzle1 === culprit.value
+                      ? 'bg-indigo-700 text-white'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
                   >
                     {culprit.name}
                   </button>
@@ -161,11 +160,10 @@ const FinalPuzzleStage2 = () => {
                   <button
                     key={culprit.value}
                     onClick={() => handleCulpritSelect('puzzle2', culprit.value)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                      selectedCulprits.puzzle2 === culprit.value
-                        ? 'bg-indigo-700 text-white'
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    }`}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedCulprits.puzzle2 === culprit.value
+                      ? 'bg-indigo-700 text-white'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
                   >
                     {culprit.name}
                   </button>
@@ -183,11 +181,10 @@ const FinalPuzzleStage2 = () => {
                   <button
                     key={culprit.value}
                     onClick={() => handleCulpritSelect('puzzle3', culprit.value)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                      selectedCulprits.puzzle3 === culprit.value
-                        ? 'bg-indigo-700 text-white'
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    }`}
+                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedCulprits.puzzle3 === culprit.value
+                      ? 'bg-indigo-700 text-white'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      }`}
                   >
                     {culprit.name}
                   </button>
@@ -218,6 +215,12 @@ const FinalPuzzleStage2 = () => {
                     <p className="text-gray-400 leading-relaxed whitespace-pre-line">
                       {finalNarrative}
                     </p>
+                    <button
+                      onClick={handleProceed}
+                      className="bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-semibold flex items-center"
+                    >
+                      Proceed to next Stage!
+                    </button>
                   </>
                 ) : (
                   <>
@@ -228,18 +231,15 @@ const FinalPuzzleStage2 = () => {
                     <p className="text-gray-400 leading-relaxed whitespace-pre-line">
                       {finalNarrative}
                     </p>
-                  </>
-                )}
-                {isSelectionCorrect !== null && (
-                  <div className="mt-6">
                     <button
                       onClick={handleProceed}
                       className="bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-lg font-semibold flex items-center"
                     >
-                      Proceed to Stage 3
+                      Sorry...Retry!
                     </button>
-                  </div>
+                  </>
                 )}
+
               </div>
             )}
             {error && <div className="mt-4 text-red-500">{error}</div>}

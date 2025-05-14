@@ -1,86 +1,10 @@
-/*import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-console.log('DashboardPage loaded');
-
-const DashboardPage = () => {
-    const navigate = useNavigate();
-    const [coins, setCoins] = useState(0);
-    const [username, setUsername] = useState('');
-
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user) {
-            setUsername(user.username);
-            //setCoins(user.coins);
-        } else {
-            navigate('/login');
-        }
-    }, []);*/
-/*useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    const coins = localStorage.getItem('coins');
-
-    if (userId) {
-        setUsername(`User ${userId}`);
-        setCoins(coins || 0);
-    } else {
-        navigate('/');
-    }
-}, []);*/
-
-/*
-    const handleStartCase = () => {
-        navigate('/home');
-    };
-
-    return (
-        <div className="min-h-screen bg-gray-100 p-6 text-center">
-            <h1 className="text-4xl font-bold text-indigo-700">The Fatal Query</h1>
-            <p className="text-lg mt-1 text-gray-600">Query the Clues. Crack the Riddles. Beat the Clock. Nab the Killer.</p>
-
-            <div className="mt-6 flex justify-center gap-10">
-                <div className="bg-white p-4 rounded shadow-md">
-                    <h2 className="text-xl font-semibold">Welcome, {username}</h2>
-                    <p>Coins: <span className="font-bold">{coins}</span></p>
-                </div>
-                <button
-                    className="bg-indigo-600 text-white px-6 py-3 rounded shadow hover:bg-indigo-500"
-                    onClick={() => navigate('/leaderboard')}
-                >
-                    View Leaderboard
-                </button>
-                <button
-                    className="bg-purple-600 text-white px-6 py-3 rounded shadow hover:bg-purple-500"
-                    onClick={() => navigate('/profile')}
-                >
-                    Profile
-                </button>
-            </div>
-
-            <div className="mt-10">
-                <h3 className="text-2xl font-semibold mb-4">Stages</h3>
-                <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
-                    <button
-                        className="bg-green-600 text-white p-4 rounded shadow hover:bg-green-500"
-                        onClick={handleStartCase}
-                    >
-                        Start Case: Murder at Midnight
-                    </button>*/
-{/* Future stage buttons can go here */ }
-/*</div >
-</div >
-</div >
-);
-};
-
-export default DashboardPage;
-*/
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; // Import Link
 import { Music, FileText, ChevronRight, Volume2, Clock, Database, GitBranch, Users, Trophy, UserCircle } from 'lucide-react';
 import ss from '../assets/ss.png';
 import vv from '../assets/vv.png';
 import sw from '../assets/sw.png';
+
 const DashboardPage = () => {
     const navigate = useNavigate();
     const [coins, setCoins] = useState(0);
@@ -98,7 +22,7 @@ const DashboardPage = () => {
             const user = JSON.parse(localStorage.getItem('user'));
             if (user) {
                 setUsername(user.username);
-                setCoins(user.coins || 100); // Ensure coins is initialized
+                setCoins(user.coins); // Ensure coins is initialized
             } else {
                 navigate('/');
             }
@@ -111,7 +35,7 @@ const DashboardPage = () => {
             setIsLoaded(true);
         }, 300);
         return () => clearTimeout(timer);
-    }, [navigate]); // Added navigate as dependency
+    }, [navigate]);
 
     const toggleAudio = () => setIsAudioPlaying(!isAudioPlaying);
 
@@ -202,7 +126,7 @@ const DashboardPage = () => {
                         {stages.map((stage) => (
                             <div
                                 key={stage.id}
-                                className="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-indigo-600 transition-colors shadow-md flex flex-col items-start justify-between"
+                                className="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-indigo-600 transition-colors shadow-md flex flex-col items-start justify-between cursor-pointer"
                                 onClick={() => handleStartCase(stage.id)}
                             >
                                 {stage.imageUrl && (
@@ -225,8 +149,9 @@ const DashboardPage = () => {
                         ))}
                     </div>
                 </div>
+
                 {/* Game features with better cards */}
-                <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full">
                     <div className="bg-gray-900 bg-opacity-80 p-6 rounded-xl border border-gray-800 hover:border-indigo-700 transition-colors shadow-lg group">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="p-2 bg-indigo-900 rounded-lg">
@@ -262,10 +187,10 @@ const DashboardPage = () => {
                 <div className="mt-20 text-center text-gray-500">
                     <p>Unmask the culprit. Recover the score. Restore the harmony.</p>
                 </div>
-
             </div>
         </div>
     );
 };
 
 export default DashboardPage;
+
